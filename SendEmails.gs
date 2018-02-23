@@ -1,4 +1,5 @@
 function SendEmails() {
+  var ACCEPTED_SHEET = "ACCEPTED";
   var TOTAL_ACCEPTED = 50;
   var GO_ROW = 2;
   var GO_COLUMN = 1;
@@ -15,7 +16,7 @@ function SendEmails() {
 
 
   // select the sheet to send from
-  var sheet = SpreadsheetApp.setActiveSheet(SpreadsheetApp.getActiveSpreadsheet().getSheets()[0]);
+  var sheet = SpreadsheetApp.setActiveSheet(SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ACCEPTED_SHEET));
 
   // Locate recipients' names & emails
   var recipients = sheet.getRange(GO_ROW, GO_COLUMN, TOTAL_ACCEPTED, 2).getValues()
