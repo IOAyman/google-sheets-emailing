@@ -16,14 +16,19 @@ function SendEmails() {
 
 
   // select the sheet to send from
-  var sheet = SpreadsheetApp.setActiveSheet(SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ACCEPTED_SHEET));
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ACCEPTED_SHEET);
+  if (!sheet) {
+    Browser.msgBox("Could not find "+ACCEPTED_SHEET+" sheet! Please create it.", Browser.Buttons.OK);
+    return;
+  }
+  SpreadsheetApp.setActiveSheet(sheet);
 
   // Locate recipients' names & emails
   var recipients = sheet.getRange(GO_ROW, GO_COLUMN, TOTAL_ACCEPTED, 2).getValues()
                         // of course filter out empty email cells!
                         .filter(function (luckyOne) { return luckyOne[1] || false; });
 
-  Logger.log("Number of rows: %s\n\nLucky Ones:\n: %s\n\n", TOTAL_ACCEPTED, recipients.join("\n"));
+  Logger.log("Number of rows: %s\n\nLucky Ones:\n%s\n\n", TOTAL_ACCEPTED, recipients.join("\n"));
 
   // Open email template, get the body section and load the text in it
   var template = DocumentApp.openById(TEMPLATE_ID).getBody().getText();
