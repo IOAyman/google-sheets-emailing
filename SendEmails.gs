@@ -45,6 +45,11 @@ function SendEmails() {
     });
     Logger.log("Confirmation email sent to: %s  < %s >", name, email);
   });
+
+
+  GmailApp.sendEmail(ADMINS.map(function (admin) { return admin.email }),
+    EMAIL_SUBJECT + " - LOG", Logger.getLog(),
+    { name: EMAIL_FROM_NAME });
 };
 
 function onOpen() {
