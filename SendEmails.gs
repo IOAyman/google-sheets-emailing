@@ -1,11 +1,11 @@
 function SendEmails() {
   var ACCEPTED_SHEET = "ACCEPTED";
-  var TOTAL_ACCEPTED = 50;
+  var TOTAL_ACCEPTED = 60;
   var GO_ROW = 2;
   var GO_COLUMN = 1;
 
   var TEMPLATE_ID = "";
-  var TAG_NAME = "{{NAME}}";
+  var TAG_NAME = /{{NAME}}/gi;
 
   var EMAIL_SUBJECT = "";
   var EMAIL_FROM_NAME = "";
